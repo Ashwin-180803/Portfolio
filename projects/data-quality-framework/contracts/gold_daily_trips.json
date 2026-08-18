@@ -1,0 +1,17 @@
+{
+  "name": "gold_daily_trips",
+  "min_rows": 1,
+  "max_rows": 5000,
+  "freshness_column": "trip_date",
+  "max_lag_days": 30,
+  "columns": {
+    "trip_date": { "type": "date", "nullable": false },
+    "trip_count": { "type": "number", "nullable": false },
+    "avg_duration_sec": { "type": "number", "nullable": false },
+    "member_share_pct": { "type": "number", "nullable": false }
+  },
+  "null_rate_max": {
+    "trip_date": 0,
+    "trip_count": 0
+  }
+}

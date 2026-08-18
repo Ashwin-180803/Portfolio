@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-ink: #0b0f14;
+  --color-ink-2: #10161d;
+  --color-surface: #141b24;
+  --color-surface-2: #1a2330;
+  --color-line: #243041;
+  --color-mist: #8b9aab;
+  --color-paper: #e8eef4;
+  --color-teal: #2ee6a6;
+  --color-teal-dim: #1a7f62;
+  --color-amber: #f0c14b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-teal) 35%, transparent);
+  color: var(--color-paper);
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-line) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-line) 55%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 20%, transparent 75%);
+}
+
+.pipeline-glow {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-teal) 25%, transparent),
+    0 20px 60px color-mix(in srgb, var(--color-teal) 8%, transparent);
+}

@@ -1,0 +1,15 @@
+services:
+  airflow:
+    image: apache/airflow:2.9.3
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/dags
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      _AIRFLOW_WWW_USER_USERNAME: admin
+      _AIRFLOW_WWW_USER_PASSWORD: admin
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ..:/opt/airflow/projects
+    ports:
+      - "8080:8080"
+    command: standalone

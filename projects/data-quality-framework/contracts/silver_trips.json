@@ -1,0 +1,27 @@
+{
+  "name": "silver_trips",
+  "min_rows": 100,
+  "max_rows": 100000,
+  "freshness_column": "started_at",
+  "max_lag_days": 30,
+  "columns": {
+    "ride_id": { "type": "string", "nullable": false },
+    "rideable_type": { "type": "string", "nullable": false },
+    "started_at": { "type": "datetime", "nullable": false },
+    "ended_at": { "type": "datetime", "nullable": false },
+    "start_station_id": { "type": "string", "nullable": false },
+    "end_station_id": { "type": "string", "nullable": false },
+    "member_casual": { "type": "string", "nullable": false },
+    "duration_sec": { "type": "number", "nullable": false }
+  },
+  "null_rate_max": {
+    "ride_id": 0,
+    "start_station_id": 0,
+    "end_station_id": 0,
+    "member_casual": 0
+  },
+  "accepted_values": {
+    "member_casual": ["member", "casual"],
+    "rideable_type": ["classic_bike", "electric_bike"]
+  }
+}

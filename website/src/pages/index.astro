@@ -1,0 +1,70 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import PipelineDiagram from "../components/PipelineDiagram.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import SkillGrid from "../components/SkillGrid.astro";
+import { profile } from "../data/profile";
+import { projects } from "../data/projects";
+
+const featured = projects.filter((project) => project.featured);
+---
+
+<Layout>
+  <Hero />
+
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-widest text-teal">How the work fits together</p>
+        <h2 class="mt-2 text-2xl font-semibold">Citi Bike analytics platform</h2>
+      </div>
+    </div>
+    <p class="mt-4 max-w-3xl text-mist">
+      One public dataset, four repos-in-waiting. Ingest lands Parquet, dbt models a star schema, a DAG sequences the day, and a quality gate refuses to publish bad tables.
+    </p>
+    <div class="mt-8">
+      <PipelineDiagram />
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-ink-2/60">
+    <div class="mx-auto max-w-6xl px-6 py-16">
+      <p class="font-mono text-xs uppercase tracking-widest text-teal">Featured</p>
+      <h2 class="mt-2 text-2xl font-semibold">Projects</h2>
+      <div class="mt-8 grid gap-5 md:grid-cols-2">
+        {featured.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <p class="font-mono text-xs uppercase tracking-widest text-teal">Stack</p>
+    <h2 class="mt-2 text-2xl font-semibold">What I use</h2>
+    <div class="mt-8">
+      <SkillGrid />
+    </div>
+  </section>
+
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-6xl px-6 py-16">
+      <p class="font-mono text-xs uppercase tracking-widest text-teal">Other work</p>
+      <h2 class="mt-2 text-2xl font-semibold">Not the featured DE grid</h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        {
+          profile.otherWork.map((item) => (
+            <a
+              href={item.href}
+              class="rounded-sm border border-line bg-surface p-5 transition hover:border-teal/50"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <h3 class="font-medium text-paper">{item.name}</h3>
+              <p class="mt-2 text-sm text-mist">{item.description}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

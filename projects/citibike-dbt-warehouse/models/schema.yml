@@ -1,0 +1,79 @@
+version: 2
+
+models:
+  - name: stg_trips
+    description: Cleaned Citi Bike trips at ride grain, renamed and typed for the warehouse.
+    columns:
+      - name: ride_id
+        tests:
+          - unique
+          - not_null
+      - name: member_casual
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["member", "casual"]
+      - name: rideable_type
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["classic_bike", "electric_bike"]
+      - name: duration_sec
+        tests:
+          - not_null
+      - name: start_station_id
+        tests:
+          - not_null
+      - name: end_station_id
+        tests:
+          - not_null
+
+  - name: dim_date
+    description: Date dimension derived from trip start dates.
+    columns:
+      - name: trip_date
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_station
+    description: Conformed station dimension from start and end stations.
+    columns:
+      - name: station_id
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_trips
+    description: Trip fact table. Grain is one row per ride_id.
+    columns:
+      - name: ride_id
+        tests:
+          - unique
+          - not_null
+      - name: trip_date
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: trip_date
+      - name: start_station_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_station')
+              field: station_id
+      - name: end_station_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_station')
+              field: station_id
+
+  - name: rpt_daily_trips
+    description: Daily trip volume and member mix for reporting.
+    columns:
+      - name: trip_date
+        tests:
+          - unique
+          - not_null

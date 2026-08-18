@@ -1,0 +1,44 @@
+---
+import { profile } from "../data/profile";
+import { currentPath, withBase } from "../lib/paths";
+
+const path = currentPath(Astro.url.pathname);
+const links = [
+  { href: "/", label: "Work" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
+];
+---
+
+<header class="sticky top-0 z-30 border-b border-line/80 bg-ink/80 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a href={withBase("/")} class="font-mono text-sm tracking-tight text-teal">
+      {profile.githubHandle}<span class="text-mist"> / portfolio</span>
+    </a>
+    <nav class="flex items-center gap-6 text-sm">
+      {
+        links.map((link) => (
+          <a
+            href={withBase(link.href)}
+            class:list={[
+              "transition-colors hover:text-teal",
+              path === link.href || (link.href !== "/" && path.startsWith(link.href))
+                ? "text-paper"
+                : "text-mist",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href={profile.github}
+        class="hidden text-mist transition-colors hover:text-teal sm:inline"
+        target="_blank"
+        rel="noreferrer"
+      >
+        GitHub
+      </a>
+    </nav>
+  </div>
+</header>

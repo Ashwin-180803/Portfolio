@@ -1,0 +1,30 @@
+---
+const stages = [
+  { id: "01", name: "Lakehouse", detail: "Bronze / silver / gold" },
+  { id: "02", name: "Warehouse", detail: "dbt star schema" },
+  { id: "03", name: "Orchestrate", detail: "Daily DAG" },
+  { id: "04", name: "Quality", detail: "Contracts + report" },
+];
+---
+
+<div class="overflow-x-auto rounded-sm border border-line bg-surface p-6">
+  <p class="font-mono text-xs uppercase tracking-widest text-mist">Platform graph</p>
+  <div class="mt-6 flex min-w-[640px] items-stretch gap-3">
+    {
+      stages.map((stage, index) => (
+        <>
+          <div class="flex-1 rounded-sm border border-line bg-ink-2 p-4">
+            <p class="font-mono text-xs text-teal">{stage.id}</p>
+            <p class="mt-2 font-medium text-paper">{stage.name}</p>
+            <p class="mt-1 text-xs text-mist">{stage.detail}</p>
+          </div>
+          {index < stages.length - 1 && (
+            <div class="flex items-center font-mono text-teal" aria-hidden="true">
+              →
+            </div>
+          )}
+        </>
+      ))
+    }
+  </div>
+</div>

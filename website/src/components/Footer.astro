@@ -1,0 +1,16 @@
+---
+import { profile } from "../data/profile";
+---
+
+<footer class="border-t border-line">
+  <div class="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-8 text-sm text-mist sm:flex-row sm:items-center sm:justify-between">
+    <p class="font-mono">
+      {profile.name} · {profile.title}
+    </p>
+    <div class="flex gap-5">
+      <a class="hover:text-teal" href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
+      <a class="hover:text-teal" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+      <a class="hover:text-teal" href={`mailto:${profile.email}`}>Email</a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,52 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SkillGrid from "../components/SkillGrid.astro";
+import { profile } from "../data/profile";
+---
+
+<Layout title={`About · ${profile.name}`} description={profile.summary}>
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <p class="font-mono text-xs uppercase tracking-widest text-teal">About</p>
+    <h1 class="mt-3 text-4xl font-semibold">{profile.name}</h1>
+    <p class="mt-2 font-mono text-teal">{profile.title}</p>
+    <div class="mt-8 space-y-5 text-mist leading-relaxed">
+      {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+
+    <dl class="mt-10 grid gap-4 border border-line bg-surface p-5 font-mono text-sm sm:grid-cols-2">
+      <div>
+        <dt class="text-mist">Location</dt>
+        <dd class="mt-1 text-paper">{profile.location}</dd>
+      </div>
+      <div>
+        <dt class="text-mist">GitHub</dt>
+        <dd class="mt-1">
+          <a class="text-teal hover:underline" href={profile.github} target="_blank" rel="noreferrer">
+            {profile.githubHandle}
+          </a>
+        </dd>
+      </div>
+      <div>
+        <dt class="text-mist">Email</dt>
+        <dd class="mt-1">
+          <a class="text-teal hover:underline" href={`mailto:${profile.email}`}>{profile.email}</a>
+        </dd>
+      </div>
+      <div>
+        <dt class="text-mist">LinkedIn</dt>
+        <dd class="mt-1">
+          <a class="text-teal hover:underline" href={profile.linkedin} target="_blank" rel="noreferrer">
+            placeholder
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    <div class="mt-12">
+      <h2 class="text-xl font-semibold">Skills</h2>
+      <div class="mt-6">
+        <SkillGrid />
+      </div>
+    </div>
+  </section>
+</Layout>
